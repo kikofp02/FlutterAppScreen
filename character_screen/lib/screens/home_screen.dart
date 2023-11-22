@@ -5,7 +5,7 @@ const List<Character> characters = [
   Character(
       name: 'Character 1',
       description: 'Description 1',
-      imagePath: 'assets/images/BoaHancockDance.gif'),
+      imagePath: 'assets/images/BoaMudae.jpg'),
   Character(
       name: 'Character 2',
       description: 'Description 2',
