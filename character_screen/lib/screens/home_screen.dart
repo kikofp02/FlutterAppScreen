@@ -3,36 +3,39 @@ import 'package:character_screen/objects/character.dart';
 
 const List<Character> characters = [
   Character(
-      name: 'Character 1',
-      description: 'Description 1',
-      imagePath: 'assets/images/BoaMudae.jpg'),
+      name: 'Boa Hancock',
+      descriptionShort: 'She is one of the Shichibukai and captain of the Kuja Pirates. She is the Empress of the Amazon Tribe on the Isle of Woman.',
+      imagePath: 'assets/images/BoaMudae.jpg',
+      bestAlias: 'PIRATE EMPRESS',
+      rank: 1,
+      descriptionLong: 'She is one of the Shichibukai and captain of the Kuja Pirates. She is the Empress of the Amazon Tribe on the Isle of Woman. She detests the World Government, but wants to keep her Shichibukai title. Her immense beauty belies her cruel personality, as shown when she kicks a kitten in her way.'),
   Character(
       name: 'Character 2',
-      description: 'Description 2',
+      descriptionShort: 'Description 2',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 3',
-      description: 'Description 3',
+      descriptionShort: 'Description 3',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 4',
-      description: 'Description 4',
+      descriptionShort: 'Description 4',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 5',
-      description: 'Description 5',
+      descriptionShort: 'Description 5',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 6',
-      description: 'Description 6',
+      descriptionShort: 'Description 6',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 7',
-      description: 'Description 7',
+      descriptionShort: 'Description 7',
       imagePath: 'assets/images/BoaHancockDance.gif'),
   Character(
       name: 'Character 8',
-      description: 'Description 8',
+      descriptionShort: 'Description 8',
       imagePath: 'assets/images/BoaHancockDance.gif'),
 ];
 
@@ -45,9 +48,9 @@ class HomeScreen extends StatelessWidget {
     //final itemsPerRow = (screenSize.width / 150).floor();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(221, 29, 42, 59),
+      backgroundColor: Color.fromARGB(255, 29, 42, 59),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(221, 13, 19, 27).withOpacity(0.5),
+        backgroundColor: Color.fromARGB(255, 19, 28, 39),
         title: const Text(
           "Pick your waifu:",
           style: TextStyle(
@@ -91,7 +94,7 @@ class CharacterGridItem extends StatelessWidget {
         footer: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Container(
-            color: Color.fromARGB(221, 13, 19, 27).withOpacity(0.5),
+            color: Color.fromARGB(255, 19, 28, 39).withOpacity(0.5),
             child: Align(
               alignment: Alignment.center,
               child: Text(
