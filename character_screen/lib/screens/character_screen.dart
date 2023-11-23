@@ -25,13 +25,16 @@ class _CharacterScreenState extends State<CharacterScreen> {
     final Character character =
         ModalRoute.of(context)!.settings.arguments as Character;
 
+    // Main screen scafold
     return Scaffold(
+      // Appbar of the screen
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         backgroundColor: const Color.fromARGB(255, 19, 28, 39),
       ),
+      // Container for the background image
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -41,10 +44,12 @@ class _CharacterScreenState extends State<CharacterScreen> {
             fit: BoxFit.cover,
           ),
         ),
+        // Blurr effect
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: Container(
             color: Colors.transparent,
+            // Container for the second image
             child: Container(
               width: double.infinity,
               height: double.infinity,
@@ -54,8 +59,11 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   fit: BoxFit.fitHeight,
                 ),
               ),
+              // Main ListView of the screen
               child: ListView(
+                scrollDirection: Axis.vertical,
                 children: [
+                  //Container to limit the view of the background
                   Container(
                     height: (screenSize.height - 250),
                   ),
@@ -70,175 +78,200 @@ class _CharacterScreenState extends State<CharacterScreen> {
   }
 
   Container CharacterDisplay(Character character) {
+    // Main container of the Character Display section
     return Container(
-      height: 1000,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 29, 42, 59),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment(0.0, 0.02),
-          colors: [
-            Colors.transparent,
-            Color.fromARGB(255, 29, 42, 59),
-          ],
-          stops: [0.0, 0.4],
-        ),
-      ),
-      child: Center(
-        child: SizedBox(
-          width: 400,
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 100,
-                bottom: 100,
-                left: 16.0,
-                right: 16.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BasicDescription(character),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 200,
-                          width: 150,
-                          color: Colors.red,
-                          margin: EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 20, left: 10),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Colors.blue),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(
-                                    "title",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 200,
-                          width: 150,
-                          color: Colors.red,
-                          margin: EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 20, left: 10),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Colors.blue),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(
-                                    "title",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 200,
-                          width: 150,
-                          color: Colors.red,
-                          margin: EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 20, left: 10),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Colors.blue),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(
-                                    "title",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 200,
-                          width: 150,
-                          color: Colors.red,
-                          margin: EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 20, left: 10),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Colors.blue),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(
-                                    "title",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+      child: Stack(
+        children: [
+          Container(
+            child: Column(
+              children: [
+                Container(
+                  height: 200,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 29, 42, 59),
+                    // Top color gradient
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Color.fromARGB(255, 29, 42, 59),
                       ],
                     ),
                   ),
-                ],
+                ),
+                Container(
+                  height: 1000,
+                  color: Color.fromARGB(255, 29, 42, 59),
+                ),
+              ],
+            ),
+          ),
+          Center(
+            // Main box for the character details
+            child: SizedBox(
+              width: 400,
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 100,
+                    bottom: 100,
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BasicDescription(character),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 200,
+                              width: 150,
+                              color: Colors.red,
+                              margin: EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 20, left: 10),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: Colors.blue),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: Text(
+                                        "title",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 200,
+                              width: 150,
+                              color: Colors.red,
+                              margin: EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 20, left: 10),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: Colors.blue),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: Text(
+                                        "title",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 200,
+                              width: 150,
+                              color: Colors.red,
+                              margin: EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 20, left: 10),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: Colors.blue),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: Text(
+                                        "title",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 200,
+                              width: 150,
+                              color: Colors.red,
+                              margin: EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 20, left: 10),
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: Colors.blue),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: Text(
+                                        "title",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   Container BasicDescription(Character character) {
+    // Main container for the details section and column with cross axis on left
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Alias display
           Text(
             character.bestAlias ?? '',
             style: const TextStyle(
               color: Color.fromARGB(255, 252, 255, 85),
             ),
           ),
+          // Name display
           Padding(
             padding: const EdgeInsets.only(bottom: 40),
             child: Text(
@@ -250,6 +283,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
               ),
             ),
           ),
+          // Like Rank display
           Container(
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 54, 85, 131),
@@ -258,22 +292,34 @@ class _CharacterScreenState extends State<CharacterScreen> {
               ),
             ),
             height: 80,
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "FAVOURITES: ${character.favs}",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
                 Text(
-                  "RANK: ${character.rank}",
+                  "RANK: ${character.favs}",
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
                 ),
               ],
             ),
@@ -281,6 +327,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
           const SizedBox(
             height: 40,
           ),
+          // Expandable text
           ExpandablePanel(
             collapsed: Text(
               character.descriptionShort,
@@ -301,6 +348,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
             ),
             controller: _expandableController,
           ),
+          // Expandable text TRIGGER
           SizedBox(
             height: 40,
             child: Padding(
