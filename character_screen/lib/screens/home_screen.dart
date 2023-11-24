@@ -14,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 29, 42, 59),
       appBar: AppBar(
-
         backgroundColor: Color.fromARGB(255, 19, 28, 39),
         title: const Text(
           "Pick your waifu:",
@@ -23,20 +22,42 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: GridView.builder(
-        itemCount: characters.length,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 250,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 2 / 3,
-        ),
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () => Navigator.of(context)
-                .pushNamed("/characterDemo", arguments: characters[index]),
-            child: CharacterGridItem(index: index),
+      body: FutureBuilder(
+        future: loadCharacters(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData) {
+            return const Center(
+              child: Text('No data available'),
+            );
+          }
+          final characters = snapshot.data!;
+          return GridView.builder(
+            itemCount: characters.length,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 2 / 3,
+            ),
+            padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .pushNamed("/characterDemo", arguments: characters[index]),
+                child: CharacterGridItem(
+                  index: index,
+                  character: characters[index],
+                ),
+              );
+            },
           );
         },
       ),
@@ -48,9 +69,11 @@ class CharacterGridItem extends StatelessWidget {
   const CharacterGridItem({
     super.key,
     required this.index,
+    required this.character,
   });
 
   final int index;
+  final Character character;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +86,7 @@ class CharacterGridItem extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                characters[index].name,
+                character.name,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -75,7 +98,7 @@ class CharacterGridItem extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Image(
-            image: AssetImage(characters[index].imagePath),
+            image: AssetImage(character.mainImagePaths.first),
             fit: BoxFit.cover,
           ),
         ),

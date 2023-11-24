@@ -19,6 +19,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
     _expandableController = ExpandableController();
   }
 
+  double _startX = 0.0;
+  int mainImageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -40,7 +43,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(character.imagePath),
+            image: AssetImage(character.mainImagePaths[mainImageIndex]),
             fit: BoxFit.cover,
           ),
         ),
@@ -55,7 +58,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
               height: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(character.imagePath),
+                  image: AssetImage(character.mainImagePaths[mainImageIndex]),
                   fit: BoxFit.fitHeight,
                 ),
               ),
@@ -64,8 +67,33 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 scrollDirection: Axis.vertical,
                 children: [
                   //Container to limit the view of the background
-                  Container(
-                    height: (screenSize.height - 250),
+                  GestureDetector(
+                    onPanStart: (details) {
+                      _startX = details.globalPosition.dx;
+                    },
+                    onPanUpdate: (details) {
+                      double currentX = details.globalPosition.dx;
+                      double deltaX = currentX - _startX;
+
+                      if (deltaX > 0 &&
+                          (mainImageIndex + 1) <
+                              character.mainImagePaths.length) {
+                        setState(() {
+                          mainImageIndex++;
+                        });
+                      } else if (deltaX < 0 && (mainImageIndex - 1) >= 0) {
+                        setState(() {
+                          mainImageIndex--;
+                        });
+                      }
+
+                      _startX = currentX;
+                    },
+                    child: Container(
+                      height: screenSize.height <= 250
+                          ? screenSize.height
+                          : screenSize.height - 250,
+                    ),
                   ),
                   CharacterDisplay(character),
                 ],
@@ -83,28 +111,27 @@ class _CharacterScreenState extends State<CharacterScreen> {
       child: Stack(
         children: [
           Container(
-            child: Column(
-              children: [
-                Container(
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 29, 42, 59),
-                    // Top color gradient
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Color.fromARGB(255, 29, 42, 59),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 1000,
-                  color: Color.fromARGB(255, 29, 42, 59),
-                ),
-              ],
+            height: 200,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 29, 42, 59),
+              // Top color gradient
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Color.fromARGB(255, 29, 42, 59),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 200,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: Color.fromARGB(255, 29, 42, 59),
             ),
           ),
           Center(
@@ -295,6 +322,13 @@ class _CharacterScreenState extends State<CharacterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  "RANK: ${character.favs}",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -313,13 +347,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
                       color: Colors.red,
                     ),
                   ],
-                ),
-                Text(
-                  "RANK: ${character.favs}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
                 ),
               ],
             ),
