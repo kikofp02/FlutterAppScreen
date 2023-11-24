@@ -67,34 +67,51 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 scrollDirection: Axis.vertical,
                 children: [
                   //Container to limit the view of the background
-                  GestureDetector(
-                    onPanStart: (details) {
-                      _startX = details.globalPosition.dx;
-                    },
-                    onPanUpdate: (details) {
-                      double currentX = details.globalPosition.dx;
-                      double deltaX = currentX - _startX;
-
-                      if (deltaX > 0 &&
-                          (mainImageIndex + 1) <
-                              character.mainImagePaths.length) {
-                        setState(() {
-                          mainImageIndex++;
-                        });
-                      } else if (deltaX < 0 && (mainImageIndex - 1) >= 0) {
-                        setState(() {
-                          mainImageIndex--;
-                        });
-                      }
-
-                      _startX = currentX;
-                    },
-                    child: Container(
-                      height: screenSize.height <= 250
-                          ? screenSize.height
-                          : screenSize.height - 250,
+                  Container(
+                    height: screenSize.height <= 250
+                        ? screenSize.height
+                        : screenSize.height - 250,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              print('button $mainImageIndex');
+                              if ((mainImageIndex + 1) <
+                                  character.mainImagePaths.length) {
+                                setState(() {
+                                  mainImageIndex++;
+                                });
+                              }
+                              print('button $mainImageIndex');
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              color: Colors.red,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              if ((mainImageIndex - 1) >= 0) {
+                                setState(() {
+                                  mainImageIndex--;
+                                });
+                              }
+                              print('button $mainImageIndex');
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  //
                   CharacterDisplay(character),
                 ],
               ),
