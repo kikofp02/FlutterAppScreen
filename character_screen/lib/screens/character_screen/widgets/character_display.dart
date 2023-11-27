@@ -13,6 +13,10 @@ class CharacterDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    double scalingFactor = (screenSize.width) * 0.002;
+    final double sidesPadding =
+        screenSize.width <= 440 ? 20 :  20 + ((screenSize.width - 440) / 60) * 20;
     return Container(
       child: Stack(
         children: [
@@ -47,10 +51,10 @@ class CharacterDisplay extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                       top: 100,
-                      left: 20.0,
-                      right: 20.0,
+                      left: sidesPadding,
+                      right: sidesPadding,
                     ),
                     child: BasicDescription(
                       character: character,
@@ -61,10 +65,10 @@ class CharacterDisplay extends StatelessWidget {
               if (character.filmography != null)
                 Column(
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(
-                        left: 20.0,
-                        right: 20.0,
+                        left: sidesPadding,
+                        right: sidesPadding,
                       ),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -72,7 +76,7 @@ class CharacterDisplay extends StatelessWidget {
                           "Filmography:",
                           style: TextStyle(
                             color: Color.fromARGB(255, 174, 184, 197),
-                            fontSize: 20,
+                            fontSize: 20 * scalingFactor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -89,16 +93,15 @@ class CharacterDisplay extends StatelessWidget {
                   ],
                 ),
               Container(
-                margin: const EdgeInsets.only(
-                  left: 40,
-                  right: 20,
-                ),
-                height: 100,
+                
+                height: 100 * scalingFactor,
                 child: Center(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 30,),
+                    const SizedBox(
+                      height: 30,
+                    ),
                     Container(
                       height: 1,
                       width: 300,
@@ -116,18 +119,18 @@ class CharacterDisplay extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
+                    Text(
                       "WaifuTracker.net is a property of KikoFP Co.,Ltd. ©2023 All Rights Reserved.",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 10,
+                        fontSize: 10 * scalingFactor,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "This site is protected by Me and Myself and I.",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 7,
+                        fontSize: 7* scalingFactor,
                       ),
                     ),
                   ],
