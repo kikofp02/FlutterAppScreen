@@ -70,13 +70,13 @@ class CharacterDisplay extends StatelessWidget {
                         left: sidesPadding,
                         right: sidesPadding,
                       ),
-                      child: Align(
+                      child: const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Filmography:",
                           style: TextStyle(
                             color: Color.fromARGB(255, 174, 184, 197),
-                            fontSize: 20 * scalingFactor,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -94,7 +94,7 @@ class CharacterDisplay extends StatelessWidget {
                 ),
               Container(
                 
-                height: 100 * scalingFactor,
+                height: 100,
                 child: Center(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +123,7 @@ class CharacterDisplay extends StatelessWidget {
                       "WaifuTracker.net is a property of KikoFP Co.,Ltd. ©2023 All Rights Reserved.",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 10 * scalingFactor,
+                        fontSize: 10,
                       ),
                     ),
                     Text(

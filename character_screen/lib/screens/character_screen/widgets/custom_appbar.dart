@@ -14,6 +14,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 10),
       height: 80,
       child: Padding(
         padding: const EdgeInsets.all(20),

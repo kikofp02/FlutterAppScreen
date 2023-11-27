@@ -14,6 +14,7 @@ class TitlesScrollableHorizontalDisplay extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (TitleItem title in titles)
             TitleItemDisplay(
@@ -37,7 +38,7 @@ class TitleItemDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      child: Stack(
+      child: Column(
         children: [
           Container(
             height: 200,
@@ -49,20 +50,23 @@ class TitleItemDisplay extends StatelessWidget {
             ),
             margin: const EdgeInsets.all(8.0),
           ),
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Color.fromARGB(255, 54, 85, 131),
-            ),
-            margin: const EdgeInsets.only(top: 180, left: 10, right: 10),
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: Text(
-                title.title,
-                style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 174, 184, 197),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Color.fromARGB(255, 54, 85, 131),
+              ),
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  title.title,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 174, 184, 197),
+                  ),
                 ),
               ),
             ),
